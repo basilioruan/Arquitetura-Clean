@@ -2,10 +2,10 @@ package br.com.todolist.adapters.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.todolist.entities.Task;
+import br.com.todolist.adapters.entities.TaskEntity;
 
-public interface TaskRepository extends JpaRepository<Task, Long>{
+public interface TaskRepository extends JpaRepository<TaskEntity, Long>{
 	
-	public Task findById(long id);
+	public TaskEntity findById(long id);
 	
 }
