@@ -1,25 +1,26 @@
 package br.com.todolist.architecture;
 
-import com.tngtech.archunit.core.domain.JavaClasses;
-import com.tngtech.archunit.core.importer.ClassFileImporter;
+import com.tngtech.archunit.junit.AnalyzeClasses;
+import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
-import org.junit.jupiter.api.Test;
 
-import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
+import static com.tngtech.archunit.library.Architectures.layeredArchitecture;
 
+@AnalyzeClasses(packages = "br.com.todolist")
 public class ArchitectureTest {
 
-    JavaClasses classes = new ClassFileImporter()
-            .importPackages("br.com.todolist");
+  @ArchTest
+  static final ArchRule camadasDevemRespeitarEstruturaCleanArchitecture = layeredArchitecture()
+      .consideringAllDependencies()
+      .layer("Controllers").definedBy("..adapters.controllers..")
+      .layer("Usecases").definedBy("..core.usecases..")
+      .layer("Gateways").definedBy("..core.gateways..")
+      .layer("Repositories").definedBy("..adapters.repositories..")
+      .layer("Config").definedBy("..config..")
 
-    @Test
-    void entitiesNaoDevemDependenDeAdapters() {
-        ArchRule rule = noClasses()
-                .that().resideInAPackage("..entities..")
-                .should().dependOnClassesThat()
-                .resideInAPackage("..adapters..");
-
-        rule.check(classes);
-    }
+      .whereLayer("Controllers").mayNotBeAccessedByAnyLayer()
+      .whereLayer("Usecases").mayOnlyBeAccessedByLayers("Controllers", "Config")
+      .whereLayer("Gateways").mayOnlyBeAccessedByLayers("Usecases", "Repositories", "Config")
+      .whereLayer("Repositories").mayOnlyBeAccessedByLayers("Config");
 
 }
