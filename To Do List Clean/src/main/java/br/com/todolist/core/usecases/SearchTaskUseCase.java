@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class SearchTask {
+public class SearchTaskUseCase {
 
   private final TaskRepositoryGateway repository;
 

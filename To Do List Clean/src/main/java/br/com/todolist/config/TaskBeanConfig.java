@@ -1,10 +1,10 @@
 package br.com.todolist.config;
 
 import br.com.todolist.core.gateways.TaskRepositoryGateway;
-import br.com.todolist.core.usecases.CreateTask;
-import br.com.todolist.core.usecases.DeleteTask;
-import br.com.todolist.core.usecases.SearchTask;
-import br.com.todolist.core.usecases.UpdateTask;
+import br.com.todolist.core.usecases.CreateTaskUseCase;
+import br.com.todolist.core.usecases.DeleteTaskUseCase;
+import br.com.todolist.core.usecases.SearchTaskUseCase;
+import br.com.todolist.core.usecases.UpdateTaskUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,23 +12,23 @@ import org.springframework.context.annotation.Configuration;
 public class TaskBeanConfig {
 
   @Bean
-  public CreateTask createTask(TaskRepositoryGateway taskRepositoryGateway) {
-    return new CreateTask(taskRepositoryGateway);
+  public CreateTaskUseCase createTask(TaskRepositoryGateway taskRepositoryGateway) {
+    return new CreateTaskUseCase(taskRepositoryGateway);
   }
 
   @Bean
-  public DeleteTask deleteTask(TaskRepositoryGateway taskRepositoryGateway) {
-    return new DeleteTask(taskRepositoryGateway);
+  public DeleteTaskUseCase deleteTask(TaskRepositoryGateway taskRepositoryGateway) {
+    return new DeleteTaskUseCase(taskRepositoryGateway);
   }
 
   @Bean
-  public SearchTask searchTask(TaskRepositoryGateway taskRepositoryGateway) {
-    return new SearchTask(taskRepositoryGateway);
+  public SearchTaskUseCase searchTask(TaskRepositoryGateway taskRepositoryGateway) {
+    return new SearchTaskUseCase(taskRepositoryGateway);
   }
 
   @Bean
-  public UpdateTask updateTask(TaskRepositoryGateway taskRepositoryGateway) {
-    return new UpdateTask(taskRepositoryGateway);
+  public UpdateTaskUseCase updateTask(TaskRepositoryGateway taskRepositoryGateway) {
+    return new UpdateTaskUseCase(taskRepositoryGateway);
   }
 
 }

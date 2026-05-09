@@ -4,7 +4,7 @@ import br.com.todolist.core.gateways.TaskRepositoryGateway;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class DeleteTask {
+public class DeleteTaskUseCase {
 
   private final TaskRepositoryGateway repository;
 
